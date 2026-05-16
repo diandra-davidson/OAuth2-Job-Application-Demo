@@ -113,7 +113,7 @@ async def submit_job_application(
         "x-applicant-name": resolved_name,
         "x-applicant-email": resolved_email,
         "x-applicant-github": resolved_github_username,
-        "x-application-comment": "This was very fun to build! Thanks for the opportunity. I built a demo application that submits to this endpoint after doing an OAuth login with GitHub. The app extracts the user's name, email, and GitHub username after verifying the identity from the OAuth token then includes that info in a newly signed HS256 JWT token in order to submit the job application. I hope this demonstrates my enthusiasm for the role and my ability to build a complete OAuth flow end-to-end. I may have sprinkled a little bit of GitHub Copilot Prompt Engineering here and there too. You will have to interview me to find out more. :) - Diandra",
+        "x-application-comment": "Add custom comment here, e.g. source of applicant referral",
         "x-application-source": "Diandra's OAuth2 Demo App",
         "x-application-timestamp": datetime.datetime.utcnow().isoformat() + "Z",
         "x-application-id": secrets.token_hex(8)
