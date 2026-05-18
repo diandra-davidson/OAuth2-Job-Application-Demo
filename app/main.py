@@ -13,14 +13,14 @@ from fastapi.responses import JSONResponse, PlainTextResponse, RedirectResponse
 from starlette.middleware.sessions import SessionMiddleware
 
 
-session_secret = keyring.get_password("clipp_com_job_app_secret", ""username"")
+session_secret = keyring.get_password("app_secret", "username")
 if not session_secret:
-    raise RuntimeError(""username" not found in keyring")
+    raise RuntimeError("username not found in keyring")
 
 
-jwt_signing_secret = keyring.get_password("clipp_com_job_app_jwt_secret", "JWT_SIGNING_SECRET")
+jwt_signing_secret = keyring.get_password("app_secret", "username")
 if not jwt_signing_secret:
-	raise RuntimeError("JWT_SIGNING_SECRET not found in keyring")
+	raise RuntimeError("username not found in keyring")
 
 
 app = FastAPI(title="Diandra's OAuth2 Callback Demo")
@@ -31,14 +31,14 @@ app.add_middleware(
     
 
 # Configure these with your OAuth provider values.
-CLIENT_ID = os.getenv("OAUTH_CLIENT_ID", "Ov23li6MrOJeoBMQLAGu")
+CLIENT_ID = os.getenv("OAUTH_CLIENT_ID")
 CLIENT_SECRET = os.getenv("OAUTH_CLIENT_SECRET", session_secret)
 AUTHORIZATION_URL = os.getenv("OAUTH_AUTHORIZATION_URL", "https://github.com/login/oauth/authorize")
 TOKEN_URL = os.getenv("OAUTH_TOKEN_URL", "https://github.com/login/oauth/access_token")
 SCOPE = os.getenv("OAUTH_SCOPE", "read:user,user:email")
 COOKIE_SECURE = os.getenv("COOKIE_SECURE", "true").strip().lower() in {"1", "true", "yes", "on"}
-JOB_APPLICATION_URL = os.getenv("JOB_APPLICATION_URL", "https://kibjbsigxbqpfhqqarbo.supabase.co/functions/v1/apply")
-JOB_APPLICATION_COMMENT = os.getenv("JOB_APPLICATION_COMMENT", "Job application submitted via OAuth flow")
+JOB_APPLICATION_URL = os.getenv("JOB_APPLICATION_URL", "https://example.com")
+JOB_APPLICATION_COMMENT = os.getenv("JOB_APPLICATION_COMMENT", "File submitted via OAuth flow")
 MAX_RESUME_BYTES = 5 * 1024 * 1024
 
 # Must exactly match what you registered at your OAuth provider.
